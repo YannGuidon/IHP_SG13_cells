@@ -3,6 +3,7 @@
 
 ## That's useful if
 * you code in Verilog
+* you play with the TinyTapeout templates https://github.com/TinyTapeout/ttihp-verilog-template
 * you use direct PDK cell instantiations (with the "(* keep *)" prefix)
 * you want to easily switch between the 2 PDK variants so your design can go to either CMOSL5L or G2 with the least modifications
 
@@ -10,11 +11,16 @@
 * The alias layer does the "(* keep *)" prefix so no need to specify it
 * just remove the cmos5l or g2 from the cell name
 
+## How to use:
+* put the file sg13_cells_sim.v in your /test directory and add its path+name to the /test/Makefile in the sim section, as extra source.
+* put either sg13_cells_sg13cmos5l.v or sg13_cells_sg13g2.v (depending on the target) in the /src directory and adde the path+name as extra source in the /test/Makefile, in the synthesis section.
+
 ## Warnings:
 * untested so far.
 * not all gates are converted but you usually don't care about the antennas.
 * it's just a quick and dirty hack
 * you're on your own
+* It is just a little abstraction layer for convenience, it does not cover the project's configuration => check https://github.com/urish/tt-simon-game/commit/a3c405c62e63701978cb67e9c8f641f15a0e2907
 
 ## Licence:
 It's based on the Free IHP PDK so their license applies.
