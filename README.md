@@ -1,5 +1,5 @@
 # IHP_SG13_cells
-"small Verilog layer to easily switch between SG13G2 and SG13CMOS5L from the IHP PDK"
+It's a small Verilog layer to easily switch between SG13G2 and SG13CMOS5L from the IHP PDK.
 
 ## That's useful if
 * you code in Verilog
@@ -7,16 +7,23 @@
 * you use direct PDK cell instantiations (with the "(* keep *)" prefix)
 * you want to easily switch between the 2 PDK variants so your design can go to either CMOSL5L or G2 with the least modifications
 
-## Changes:
+## Changes to your source code:
 * The alias layer does the "(* keep *)" prefix so no need to specify it
 * just remove the cmos5l or g2 from the cell name
 
+## What this is
+* sg13_cells_sim.v defines the cells' behaviours, only used by Icarus Verilog during the first test/ action.
+* sg13_cells_sg13cmos5l.v and sg13_cells_sg13g2.v are the wrappers to the respective technology. They are used during synthesis and "protected" against evaluation by Icarus so they are somehow part of the source code.
+
 ## How to use:
 * put the file sg13_cells_sim.v in your /test directory and add its path+name to the /test/Makefile in the sim section, as extra source.
-* put either sg13_cells_sg13cmos5l.v or sg13_cells_sg13g2.v (depending on the target) in the /src directory and add the path+name as extra source in the /test/Makefile, in the synthesis section.
+* put either sg13_cells_sg13cmos5l.v or sg13_cells_sg13g2.v (depending on the target) in the /src directory and add the path+name as extra source in the /test/Makefile, in the main source section, and the info.yaml
+
+## Example
+See https://github.com/ygdes/miniMAC_IHP
 
 ## Regenerate
-cmos5l_gates.tgz contains the directory full of the original, individual gates. convert_ihp.sh parses them to create the 3 .v files.
+The archive cmos5l_gates.tgz contains the directory full of the original, individual gates. convert_ihp.sh parses them to create the 3 .v files.
 These original files are derived from https://github.com/IHP-GmbH/IHP-Open-PDK/blob/main/ihp-sg13g2/libs.ref/sg13g2_stdcell/verilog/sg13g2_stdcell.v
 
 ## Warnings:
