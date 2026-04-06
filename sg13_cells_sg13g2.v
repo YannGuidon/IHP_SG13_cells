@@ -1,3 +1,5 @@
+`ifndef __ICARUS__
+
 module sg13_a21o_1 (X, A1, A2, B1);
 	output X;
 	input A1, A2, B1;
@@ -370,3 +372,4 @@ module sg13_xor2_1 (X, A, B);
   (* keep *) sg13g2_xor2_1 ihp(.X(X), .A(A), .B(B));
 endmodule
 
+`endif
